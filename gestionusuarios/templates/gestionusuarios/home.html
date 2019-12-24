@@ -1,0 +1,52 @@
+{% load static %}
+<html>
+    <head>
+        <title>Sistema de Trabajos de Grado</title>
+        <link rel="stylesheet" href="{% static 'gestionusuarios/style.css' %}">
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">Sistema de Gestión de Trabajos de Grado</a></h1>
+        </div>
+
+        <div id="principal">
+            <ul class="nav">
+                <li><a href="">Usuarios</a>
+                    <ul>
+                        <li><a href="nuevo">Registrar Usuario</a></li>
+                        <li><a href="">Consultar Usuario</a></li>
+                        <li><a href="">Editar Usuario</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Propuestas</a>
+                    <ul>
+                        <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
+                        <li><a href="">Consultar Propuesta</a></li>
+                        <li><a href="">Editar Propuesta</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Trabajos de Grado</a>
+                    <ul>
+                        <li><a href="">Registrar Trabajo de Grado</a></li>
+                        <li><a href="">Consultar Trabajo de Grado</a></li>
+                        <li><a href="">Editar Trabajo de Grado</a></li>
+                    </ul>
+                </li>
+                <li><a href="">Defensas</a>
+                    <ul>
+                        <li><a href="">Registrar Defensa de TG</a></li>
+                        <li><a href="">Consultar Defensa de TG</a></li>
+                        <li><a href="">Editar Defensa de TG</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="imagenprincipal">
+            <ul>
+                <li><img src="static/gestionusuarios/imagenes/librostesis.jpg" alt=""></li>
+            </ul>
+        </div>
+
+    </body>
+</html>

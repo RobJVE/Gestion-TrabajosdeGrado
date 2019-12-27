@@ -8,7 +8,7 @@ class Tipo(models.Model):
     def __str__(self):
         return self.Nombretipo
 
-class Usuario(models.Model):
+class Persona(models.Model):
     Tipousuario = models.ForeignKey(Tipo, null=True, on_delete=models.CASCADE)
     Cedula = models.CharField(unique=True, max_length=9)
     Nombres = models.CharField(max_length=40)

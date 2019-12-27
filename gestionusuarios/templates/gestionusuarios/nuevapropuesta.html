@@ -1,0 +1,59 @@
+{% load static %}
+
+<head>
+    <title>Sistema de Trabajos de Grado</title>
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+</head>
+
+{% block content %}
+
+<nav>
+    <div class="logo">
+        <h4>GESTION DE TRABAJOS DE GRADO</h4>
+    </div>
+    <ul class="nav-links">
+        <li><a href="nuevo">Usuario</a>
+            <ul>
+                <li><a href="nuevo">Registrar Usuario</a></li>
+                <li><a href="">Consultar Usuario</a></li>
+                <li><a href="">Editar Usuario</a></li>
+            </ul>
+        </li>
+        <li><a href="">Propuesta</a>
+            <ul>
+                <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
+                <li><a href="">Consultar Propuesta</a></li>
+                <li><a href="">Editar Propuesta</a></li>
+            </ul>
+        </li>
+        <li><a href="">Trabajo de Grado</a>
+            <ul>
+                <li><a href="">Registrar Trabajo de Grado</a></li>
+                <li><a href="">Consultar Trabajo de Grado</a></li>
+                <li><a href="">Editar Trabajo de Grado</a></li>
+            </ul>
+        </li>
+        <li><a href="">Defensas</a>
+            <ul>
+                <li><a href="">Registrar Defensa</a></li>
+                <li><a href="">Consultar Defensa</a></li>
+                <li><a href="">Editar Defensa</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Cerrar Sesión</a></li>
+    </ul>
+
+</nav>
+
+<br></br>
+
+<div id="persona">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" class="btn btn-color">Registrar Propuesta</button>
+    </form>
+</div>
+{% endblock %}

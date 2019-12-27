@@ -1,11 +1,11 @@
 from django import forms
 
-from gestionusuarios.models import Usuario, Propuesta
+from gestionusuarios.models import Persona, Propuesta
 
 class UsuarioForm(forms.ModelForm):
 
     class Meta:
-        model = Usuario
+        model = Persona
 
         fields = [
             'Tipousuario',

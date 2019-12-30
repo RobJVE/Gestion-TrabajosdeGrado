@@ -4,6 +4,7 @@
     <title>Sistema de Trabajos de Grado</title>
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultapropuesta.css' %}">
 </head>
 
 {% block content %}
@@ -15,38 +16,34 @@
     <ul class="nav-links">
         <li><a href="">TERM</a>
             <ul>
-                <li><a href="">Crear TERM</a></li>
-                <li><a href="">Editar TERM</a></li>
+                <li><a href="term">Crear TERM</a></li>
+                <li><a href="consultaterm">Editar TERM</a></li>
             </ul>
         </li>
         <li><a href="nuevo">Persona</a>
             <ul>
                 <li><a href="nuevo">Registrar Persona</a></li>
                 <li><a href="consultarpersona">Consultar Persona</a></li>
-                <li><a href="">Editar Persona</a></li>
                 <li><a href="tipo">Crear Tipo de Persona</a></li>
-                <li><a href="">Editar Tipo de Persona</a></li>
+                <li><a href="consultatipopersona">Editar Tipo de Persona</a></li>
             </ul>
         </li>
         <li><a href="">Propuesta</a>
             <ul>
                 <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
                 <li><a href="consultarpropuesta">Consultar Propuesta</a></li>
-                <li><a href="">Editar Propuesta</a></li>
             </ul>
         </li>
         <li><a href="">Trabajo de Grado</a>
             <ul>
                 <li><a href="">Registrar Trabajo de Grado</a></li>
                 <li><a href="">Consultar Trabajo de Grado</a></li>
-                <li><a href="">Editar Trabajo de Grado</a></li>
             </ul>
         </li>
         <li><a href="">Defensas</a>
             <ul>
                 <li><a href="">Registrar Defensa</a></li>
                 <li><a href="">Consultar Defensa</a></li>
-                <li><a href="">Editar Defensa</a></li>
             </ul>
         </li>
         <li><a href="/logout">Cerrar Sesión</a></li>
@@ -54,14 +51,35 @@
 
 </nav>
 
-<br></br>
+<br>
 
-<div id="persona">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        <button type="submit" class="btn btn-color">Registrar Propuesta</button>
-    </form>
+<div id="listapropuesta">
+
+    <h2>Lista de propuestas</h2>
+
+    <br>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Codigo</td>
+                <td>Fecha de Entrega</td>
+                <td>Titulo</td>
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for propuesta in propuestas %}
+            <tr>
+                <td>{{propuesta.Codigo}}</td>
+                <td>{{propuesta.Fechaentrega}}</td>
+                <td>{{propuesta.Titulo}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
 </div>
+
 {% endblock %}

@@ -4,6 +4,7 @@
     <title>Sistema de Trabajos de Grado</title>
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+    
 </head>
 
 {% block content %}
@@ -22,7 +23,7 @@
         <li><a href="nuevo">Persona</a>
             <ul>
                 <li><a href="nuevo">Registrar Persona</a></li>
-                <li><a href="consultarpersona">Consultar Persona</a></li>
+                <li><a href="">Consultar Persona</a></li>
                 <li><a href="">Editar Persona</a></li>
                 <li><a href="tipo">Crear Tipo de Persona</a></li>
                 <li><a href="">Editar Tipo de Persona</a></li>
@@ -54,14 +55,46 @@
 
 </nav>
 
-<br></br>
 
-<div id="persona">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        <button type="submit" class="btn btn-color">Registrar Propuesta</button>
-    </form>
+<div id="listapersona">
+
+    <h2>Persona especifica en detalle</h2>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Cedula</td>
+                <td>Nombres</td>
+                <td>Apellidos</td>
+                <td>Correoucab</td>
+                <td>Correopersonal</td>
+                <td>TelefonoPrincipal</td>
+                <td>TelefonoSecundario</td>
+                <td>Observaciones</td>
+                <td>Acciones</td>
+            </tr>
+    
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{persona.Cedula}}</td>
+                <td>{{persona.Nombres}}</td>
+                <td>{{persona.Apellidos}}</td>
+                <td>{{persona.Correoucab}}</td>
+                <td>{{persona.Correopersonal}}</td>
+                <td>{{persona.TelefonoPrincipal}}</td>
+                <td>{{persona.TelefonoSecundario}}</td>
+                <td>{{persona.Observaciones}}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'editar_persona' persona.Cedula %}">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </table>
+    
 </div>
+
 {% endblock %}

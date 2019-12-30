@@ -1,6 +1,21 @@
 from django import forms
 
-from gestionusuarios.models import Persona, Propuesta
+from gestionusuarios.models import Persona, Propuesta, Tipo, Term
+
+class TipoForm(forms.ModelForm):
+
+    class Meta:
+        model = Tipo
+
+        fields = [
+            'Nombretipo',
+        ]
+        labels = {
+            'Nombretipo': 'Nombretipo',
+        }
+        widgets = {
+            'Nombretipo': forms.TextInput(attrs={'class':'form-control'}),
+        }
 
 class UsuarioForm(forms.ModelForm):
 
@@ -41,6 +56,21 @@ class UsuarioForm(forms.ModelForm):
             'Observaciones': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+
+class TermForm(forms.ModelForm):
+
+    class Meta:
+        model = Term
+
+        fields = [
+            'Periodo',
+        ]
+        labels = {
+            'Periodo': 'Periodo',
+        }
+        widgets = {
+            'Periodo': forms.TextInput(attrs={'class':'form-control'}),
+        }
 
 class PropuestaForm(forms.ModelForm):
 

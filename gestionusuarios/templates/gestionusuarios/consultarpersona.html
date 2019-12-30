@@ -1,0 +1,109 @@
+{% load static %}
+
+<head>
+    <title>Sistema de Trabajos de Grado</title>
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultapersona.css' %}">
+</head>
+
+{% block content %}
+
+<nav>
+    <div class="logo">
+        <h4>GESTION DE TRABAJOS DE GRADO</h4>
+    </div>
+    <ul class="nav-links">
+        <li><a href="">TERM</a>
+            <ul>
+                <li><a href="term">Crear TERM</a></li>
+                <li><a href="consultaterm">Editar TERM</a></li>
+            </ul>
+        </li>
+        <li><a href="nuevo">Persona</a>
+            <ul>
+                <li><a href="nuevo">Registrar Persona</a></li>
+                <li><a href="consultarpersona">Consultar Persona</a></li>
+                <li><a href="tipo">Crear Tipo de Persona</a></li>
+                <li><a href="consultatipopersona">Editar Tipo de Persona</a></li>
+            </ul>
+        </li>
+        <li><a href="">Propuesta</a>
+            <ul>
+                <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
+                <li><a href="consultarpropuesta">Consultar Propuesta</a></li>
+            </ul>
+        </li>
+        <li><a href="">Trabajo de Grado</a>
+            <ul>
+                <li><a href="">Registrar Trabajo de Grado</a></li>
+                <li><a href="">Consultar Trabajo de Grado</a></li>
+            </ul>
+        </li>
+        <li><a href="">Defensas</a>
+            <ul>
+                <li><a href="">Registrar Defensa</a></li>
+                <li><a href="">Consultar Defensa</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Cerrar Sesión</a></li>
+    </ul>
+
+</nav>
+
+<br>
+
+<div id="listapersona">
+
+    <h2>Lista de personas</h2>
+
+    <br>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Cedula</td>
+                <td>Nombres</td>
+                <td>Apellidos</td>
+                <td>Correoucab</td>
+                <td>Correopersonal</td>
+                <td>TelefonoPrincipal</td>
+                <td>TelefonoSecundario</td>
+                <td>Observaciones</td>
+                <td>Acciones</td>
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{persona.Cedula}}</td>
+                <td>{{persona.Nombres}}</td>
+                <td>{{persona.Apellidos}}</td>
+                <td>{{persona.Correoucab}}</td>
+                <td>{{persona.Correopersonal}}</td>
+                <td>{{persona.TelefonoPrincipal}}</td>
+                <td>{{persona.TelefonoSecundario}}</td>
+                <td>{{persona.Observaciones}}</td>
+                <td>
+                    <a class="btn btn-primary" href="{% url 'editar_persona' persona.Cedula %}">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+    <br>
+
+<div id="filtropersona">
+    <form action="consultarcedula" method="POST"> {% csrf_token %}
+        Buscar persona por su cédula: 
+        <input type="text" name="cedula"  / >
+        <input type="submit" value="Filtrar" class="boton">
+    </form>
+</div>
+
+{% endblock %}

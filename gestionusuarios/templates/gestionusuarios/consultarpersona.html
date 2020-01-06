@@ -32,6 +32,8 @@
             <ul>
                 <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
                 <li><a href="consultarpropuesta">Consultar Propuesta</a></li>
+                <li><a href="nuevostatuspropuesta">Crear Estatus Propuesta</a></li>
+                <li><a href="consultarstatuspropuesta">Consultar Estatus Propuesta</a></li>
             </ul>
         </li>
         <li><a href="">Trabajo de Grado</a>
@@ -62,6 +64,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
+                <td>Tipo de Persona</td>
                 <td>Cedula</td>
                 <td>Nombres</td>
                 <td>Apellidos</td>
@@ -77,6 +80,7 @@
         <tbody>
             {% for persona in personas %}
             <tr>
+                <td>{{persona.Tipousuario}}</td>
                 <td>{{persona.Cedula}}</td>
                 <td>{{persona.Nombres}}</td>
                 <td>{{persona.Apellidos}}</td>

@@ -4,7 +4,7 @@
     <title>Sistema de Trabajos de Grado</title>
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
-    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultaterm.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultatipo.css' %}">
 </head>
 
 {% block content %}
@@ -55,26 +55,26 @@
 
 <br>
 
-<div id="listaterm">
+<div id="listatipo">
 
-    <h2>Lista de terms</h2>
+    <h2>Lista de tipo de personas</h2>
 
     <br>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Periodo</td>
+                <td>Estatus</td>
                 <td>Acciones</td>
             </tr>
 
         </thead>
         <tbody>
-            {% for term in terms %}
+            {% for status in statuspropuestas %}
             <tr>
-                <td>{{term.Periodo}}</td>
+                <td>{{status.Estatus}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'editar_term' term.Periodo %}">Editar</a>
+                    <a class="btn btn-primary">Editar</a>
                 </td>
             </tr>
             {% endfor %}

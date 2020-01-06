@@ -8,6 +8,7 @@ class Tipo(models.Model):
     def __str__(self):
         return self.Nombretipo
 
+
 class Persona(models.Model):
     Tipousuario = models.ForeignKey(Tipo, null=True, on_delete=models.CASCADE)
     Cedula = models.CharField(unique=True, max_length=9)
@@ -22,27 +23,32 @@ class Persona(models.Model):
     def __str__(self):
         return self.Nombres + ' ' + self.Apellidos
 
+
 class Term(models.Model):
     Periodo = models.IntegerField()
 
-    def getTerm(self):
-        return self.Periodo
+    def __str__(self):
+        return str(self.Periodo)
+
 
 class Statuspropuesta(models.Model):
     Estatus = models.CharField(max_length=14)
 
     def __str__(self):
         return self.Estatus
+        
 
 class Propuesta(models.Model):
     Estatusvalor = models.ForeignKey(Statuspropuesta, on_delete=models.CASCADE)
-    Codigo = models.CharField(max_length=12)
+    Termpropuesta = models.ForeignKey(Term, null=True, on_delete=models.CASCADE)
     Fechaentrega = models.DateField()
+    Codigo = models.CharField(unique=True, max_length=12)
     Titulo = models.CharField(max_length=60)
+    Alumnouno = models.ForeignKey(Persona, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.Titulo
-    
+
 
         
 

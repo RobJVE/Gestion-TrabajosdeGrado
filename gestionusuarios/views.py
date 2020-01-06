@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from gestionusuarios.forms import UsuarioForm, PropuestaForm, TipoForm, TermForm
+from gestionusuarios.forms import UsuarioForm, PropuestaForm, TipoForm, TermForm, StatusPropuestaForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
@@ -67,6 +67,7 @@ def usuario_view(request):
             form = UsuarioForm(request.POST)
             if form.is_valid():
                 form.save()
+                return redirect('/')
         else:
             form = UsuarioForm()
 
@@ -80,10 +81,25 @@ def term_view(request):
             form = TermForm(request.POST)
             if form.is_valid():
                 form.save()
+                return redirect('/')
         else:
             form = TermForm()
 
         return render(request, 'gestionusuarios/nuevoterm.html', {'form':form})
+    return redirect('/login')
+
+
+def statuspropuesta_view(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = StatusPropuestaForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = StatusPropuestaForm()
+
+        return render(request, 'gestionusuarios/nuevostatuspropuesta.html', {'form':form})
     return redirect('/login')
 
 
@@ -93,6 +109,7 @@ def propuesta_view(request):
             form = PropuestaForm(request.POST)
             if form.is_valid():
                 form.save()
+                return redirect('/')
         else:
             form = PropuestaForm()
 
@@ -102,7 +119,7 @@ def propuesta_view(request):
 
 def consultar_persona(request):
     if request.user.is_authenticated:
-        personas = Persona.objects.all()
+        personas = Persona.objects.order_by("Cedula")
         return render(request, "gestionusuarios/consultarpersona.html", {'personas': personas})
     return redirect('/login')
 
@@ -135,6 +152,13 @@ def consultar_propuesta(request):
     if request.user.is_authenticated:
         propuestas = Propuesta.objects.all()
         return render(request, "gestionusuarios/consultarpropuesta.html", {'propuestas': propuestas})
+    return redirect('/login')
+
+
+def consultar_statuspropuesta(request):
+    if request.user.is_authenticated:
+        statuspropuestas = Statuspropuesta.objects.all()
+        return render(request, "gestionusuarios/consultarstatuspropuesta.html", {'statuspropuestas': statuspropuestas})
     return redirect('/login')
 
 

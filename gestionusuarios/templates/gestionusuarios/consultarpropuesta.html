@@ -32,6 +32,8 @@
             <ul>
                 <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
                 <li><a href="consultarpropuesta">Consultar Propuesta</a></li>
+                <li><a href="nuevostatuspropuesta">Crear Estatus Propuesta</a></li>
+                <li><a href="consultarstatuspropuesta">Consultar Estatus Propuesta</a></li>
             </ul>
         </li>
         <li><a href="">Trabajo de Grado</a>
@@ -62,8 +64,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Codigo</td>
-                <td>Fecha de Entrega</td>
+                <td>Estatusvalor</td>
+                <td>TERM</td>
+                <td>Fecha de entrega</td>
+                <td>Código</td>
                 <td>Titulo</td>
             </tr>
 
@@ -71,8 +75,10 @@
         <tbody>
             {% for propuesta in propuestas %}
             <tr>
-                <td>{{propuesta.Codigo}}</td>
+                <td>{{propuesta.Estatusvalor}}</td>
+                <td>{{propuesta.Termpropuesta}}</td>
                 <td>{{propuesta.Fechaentrega}}</td>
+                <td>{{propuesta.Codigo}}</td>
                 <td>{{propuesta.Titulo}}</td>
             </tr>
             {% endfor %}

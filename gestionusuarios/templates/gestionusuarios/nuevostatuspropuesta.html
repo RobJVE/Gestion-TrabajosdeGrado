@@ -4,6 +4,7 @@
     <title>Sistema de Trabajos de Grado</title>
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+    
 </head>
 
 {% block content %}
@@ -15,7 +16,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <br>
-        <button type="submit" class="btn btn-color">Registrar Propuesta</button>
+        <button type="submit" class="btn btn-color">Registrar Nuevo Status P</button>
     </form>
 </div>
 {% endblock %}

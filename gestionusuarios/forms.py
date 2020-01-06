@@ -1,6 +1,6 @@
 from django import forms
 
-from gestionusuarios.models import Persona, Propuesta, Tipo, Term
+from gestionusuarios.models import Persona, Propuesta, Tipo, Term, Statuspropuesta
 
 class TipoForm(forms.ModelForm):
 
@@ -72,6 +72,27 @@ class TermForm(forms.ModelForm):
             'Periodo': forms.TextInput(attrs={'class':'form-control'}),
         }
 
+
+class StatusPropuestaForm(forms.ModelForm):
+
+    class Meta:
+        model = Statuspropuesta
+
+        fields = [
+            'Estatus',
+        ]
+        labels = {
+            'Estatus': 'Estatus',
+        }
+        widgets = {
+            'Estatus': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class PropuestaForm(forms.ModelForm):
 
     class Meta:
@@ -79,19 +100,25 @@ class PropuestaForm(forms.ModelForm):
 
         fields = [
             'Estatusvalor',
+            'Termpropuesta',
             'Codigo',
             'Fechaentrega',
             'Titulo',
+            'Alumnouno',
         ]
         labels = {
             'Estatusvalor': 'Estatus de la propuesta',
+            'Termpropuesta': 'TERM de la propuesta',
             'Codigo': 'Codigo',
             'Fechaentrega': 'Fecha de entrega',
             'Titulo': 'Titulo de la propuesta',
+            'Alumnouno': 'Alumno',
         }
         widgets = {
             'Estatusvalor': forms.Select(attrs={'class':'form-control'}),
+            'Termpropuesta': forms.Select(attrs={'class':'form-control'}),
             'Codigo': forms.TextInput(attrs={'class':'form-control'}),
-            'Fechaentrega': forms.DateInput(attrs={'class':'form-control'}),
+            'Fechaentrega': DateInput(attrs={'class':'form-control'}),
             'Titulo': forms.TextInput(attrs={'class':'form-control'}),
+            'Alumnouno': forms.Select(attrs={'class':'form-control'}),
         }

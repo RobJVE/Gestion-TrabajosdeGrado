@@ -1,0 +1,21 @@
+{% load static %}
+
+<head>
+    <title>Sistema de Trabajos de Grado</title>
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+</head>
+
+{% block content %}
+
+<br></br>
+
+<div id="persona">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" class="btn btn-color">Registrar Trabajo Grado</button>
+    </form>
+</div>
+{% endblock %}

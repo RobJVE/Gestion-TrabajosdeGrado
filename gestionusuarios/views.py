@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from gestionusuarios.forms import UsuarioForm, PropuestaForm, TipoForm, TermForm, StatusPropuestaForm
+from gestionusuarios.forms import UsuarioForm, PropuestaForm, TipoForm, TermForm, StatusPropuestaForm, TrabajogradoForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
@@ -117,6 +117,20 @@ def propuesta_view(request):
     return redirect('/login')
 
 
+def trabajogrado_view(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = TrabajogradoForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = TrabajogradoForm()
+
+        return render(request, 'gestionusuarios/nuevotrabajogrado.html', {'form':form})
+    return redirect('/login')
+
+
 def consultar_persona(request):
     if request.user.is_authenticated:
         personas = Persona.objects.order_by("Cedula")
@@ -162,6 +176,14 @@ def consultar_statuspropuesta(request):
     return redirect('/login')
 
 
+def consultar_propuestaaprobada(request):
+    if request.user.is_authenticated:
+        propaprobadas = Propuesta.objects.filter(Estatusvalor__Estatus='Aprobada')
+        print(propaprobadas)
+        return render(request, "gestionusuarios/consultarpropuestaaprobada.html", {'propaprobadas': propaprobadas})
+    return redirect('/login')
+
+
 def editar_persona(request, idpersona):
     if request.user.is_authenticated:
         p = Persona.objects.get(Cedula=idpersona)
@@ -201,4 +223,18 @@ def editar_tipopersona(request, id):
                 form.save()
             return redirect('/consultatipopersona')
         return render(request, "gestionusuarios/nuevotipopersona.html", {'form': form})
+    return redirect('/login')
+
+
+def editar_propuesta(request, id):
+    if request.user.is_authenticated:
+        p = Propuesta.objects.get(id=id)
+        if request.method == 'GET':
+            form = PropuestaForm(instance=p)
+        else:
+            form = PropuestaForm(request.POST, instance=p)
+            if form.is_valid():
+                form.save()
+            return redirect('/consultarpropuesta')
+        return render(request, "gestionusuarios/nuevapropuesta.html", {'form': form})
     return redirect('/login')

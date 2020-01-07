@@ -1,6 +1,6 @@
 from django import forms
 
-from gestionusuarios.models import Persona, Propuesta, Tipo, Term, Statuspropuesta
+from gestionusuarios.models import Persona, Propuesta, Tipo, Term, Statuspropuesta, Trabajogrado
 
 class TipoForm(forms.ModelForm):
 
@@ -105,6 +105,7 @@ class PropuestaForm(forms.ModelForm):
             'Fechaentrega',
             'Titulo',
             'Alumnouno',
+            'Alumnodos',
         ]
         labels = {
             'Estatusvalor': 'Estatus de la propuesta',
@@ -112,7 +113,8 @@ class PropuestaForm(forms.ModelForm):
             'Codigo': 'Codigo',
             'Fechaentrega': 'Fecha de entrega',
             'Titulo': 'Titulo de la propuesta',
-            'Alumnouno': 'Alumno',
+            'Alumnouno': 'Primer Alumno',
+            'Alumnodos': 'Segundo Alumno',
         }
         widgets = {
             'Estatusvalor': forms.Select(attrs={'class':'form-control'}),
@@ -121,4 +123,43 @@ class PropuestaForm(forms.ModelForm):
             'Fechaentrega': DateInput(attrs={'class':'form-control'}),
             'Titulo': forms.TextInput(attrs={'class':'form-control'}),
             'Alumnouno': forms.Select(attrs={'class':'form-control'}),
+            'Alumnodos': forms.Select(attrs={'class':'form-control'}),
         }
+
+
+class TrabajogradoForm(forms.ModelForm):
+
+    class Meta:
+        model = Trabajogrado
+
+        fields = [
+            'Asocpropuesta',
+            'TituloTG',
+            'Termtrabajogrado',
+            'NRC',
+            'Descriptores',
+            'Categoriatem',
+            'Fechaentrega',
+            'Nombreempresa',
+        ]
+        labels = {
+            'Asocpropuesta': 'Propuesta asociada',
+            'TituloTG': 'Titulo TG (Diferente a propuesta)',
+            'Termtrabajogrado': 'TERM',
+            'NRC': 'NRC',
+            'Descriptores': 'Descriptores',
+            'Categoriatem': 'Categoría temática',
+            'Fechaentrega': 'Fecha de entrega',
+            'Nombreempresa': 'Nombre de la empresa',
+        }
+        widgets = {
+            'Asocpropuesta': forms.Select(attrs={'class':'form-control'}),
+            'TituloTG': forms.TextInput(attrs={'class':'form-control'}),
+            'Termtrabajogrado': forms.Select(attrs={'class':'form-control'}),
+            'NRC': forms.TextInput(attrs={'class':'form-control'}),
+            'Descriptores': forms.TextInput(attrs={'class':'form-control'}),
+            'Categoriatem': forms.TextInput(attrs={'class':'form-control'}),
+            'Fechaentrega': DateInput(attrs={'class':'form-control'}),
+            'Nombreempresa': forms.TextInput(attrs={'class':'form-control'}),
+        }
+

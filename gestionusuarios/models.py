@@ -44,11 +44,32 @@ class Propuesta(models.Model):
     Fechaentrega = models.DateField()
     Codigo = models.CharField(unique=True, max_length=12)
     Titulo = models.CharField(max_length=60)
-    Alumnouno = models.ForeignKey(Persona, null=True, on_delete=models.CASCADE)
+    Alumnouno = models.ForeignKey(Persona, null=True, related_name='Alumnouno', on_delete=models.CASCADE)
+    Alumnodos = models.ForeignKey(Persona, null=True, related_name='Alumnodos', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.Codigo + ' ' + self.Titulo
+
+
+class Statustrabajogrado(models.Model):
+    Estatustg = models.CharField(max_length=27)
+
+    def __str__(self):
+        return self.Estatustg
+
+
+class Trabajogrado(models.Model):
+    Asocpropuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE)
+    TituloTG = models.CharField(blank=True, max_length=60)
+    Termtrabajogrado = models.ForeignKey(Term, null=True, on_delete=models.CASCADE)
+    NRC = models.CharField(unique=True, max_length=12)
+    Descriptores = models.CharField(max_length=50)
+    Categoriatem = models.CharField(max_length=50)
+    Fechaentrega = models.DateField()
+    Nombreempresa = models.CharField(max_length=50)
 
     def __str__(self):
         return self.Titulo
-
 
         
 

@@ -4,7 +4,7 @@
     <title>Sistema de Trabajos de Grado</title>
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
     <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
-    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultatipo.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultapersona.css' %}">
 </head>
 
 {% block content %}
@@ -59,26 +59,40 @@
 
 <br>
 
-<div id="listatipo">
+<div id="listapersona">
 
-    <h2>Lista de tipo de estatus de propuesta</h2>
+    <h2>Lista de trabajos de grado</h2>
 
     <br>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Estatus</td>
+                <td>Propuesta asociada</td>
+                <td>Título TG</td>
+                <td>TERM</td>
+                <td>NRC</td>
+                <td>Descriptores</td>
+                <td>Categoría temática</td>
+                <td>Fecha de entrega</td>
+                <td>Nombre de la empresa</td>
                 <td>Acciones</td>
             </tr>
 
         </thead>
         <tbody>
-            {% for status in statuspropuestas %}
+            {% for trabajo in trabajos %}
             <tr>
-                <td>{{status.Estatus}}</td>
+                <td>{{trabajo.Asocpropuesta}}</td>
+                <td>{{trabajo.TituloTG}}</td>
+                <td>{{trabajo.Termtrabajogrado}}</td>
+                <td>{{trabajo.NRC}}</td>
+                <td>{{trabajo.Descriptores}}</td>
+                <td>{{trabajo.Categoriatem}}</td>
+                <td>{{trabajo.Fechaentrega}}</td>
+                <td>{{trabajo.Nombreempresa}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'editar_estatusprop' status.id %}">Editar</a>
+                    <a class="btn btn-primary" href="">Editar</a>
                 </td>
             </tr>
             {% endfor %}
@@ -86,6 +100,25 @@
 
     </table>
 
+</div>
+
+    <br>
+
+<div id="filtropersona">
+    <form action="consultarcedula" method="POST"> {% csrf_token %}
+        Buscar persona por su cédula: 
+        <input type="text" name="cedula"  / >
+        <input type="submit" value="Filtrar" class="boton">
+    </form>
+</div>
+
+
+<div id="filtropersona">
+    <form action="consultarnombre" method="POST"> {% csrf_token %}
+        Buscar persona por sus nombres: 
+        <input type="text" name="nombres"  / >
+        <input type="submit" value="Filtrar" class="boton">
+    </form>
 </div>
 
 </body>

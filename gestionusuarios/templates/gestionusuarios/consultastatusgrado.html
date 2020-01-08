@@ -61,24 +61,24 @@
 
 <div id="listatipo">
 
-    <h2>Lista de tipo de estatus de propuesta</h2>
+    <h2>Lista de tipo de status de grado</h2>
 
     <br>
 
     <table class="table table-bordered">
         <thead>
             <tr>
-                <td>Estatus</td>
+                <td>Nombre Estatus</td>
                 <td>Acciones</td>
             </tr>
 
         </thead>
         <tbody>
-            {% for status in statuspropuestas %}
+            {% for status in statustg %}
             <tr>
-                <td>{{status.Estatus}}</td>
+                <td>{{status.Estatustg}}</td>
                 <td>
-                    <a class="btn btn-primary" href="{% url 'editar_estatusprop' status.id %}">Editar</a>
+                    <a class="btn btn-primary" href="">Editar</a>
                 </td>
             </tr>
             {% endfor %}

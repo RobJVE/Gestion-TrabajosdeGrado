@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from gestionusuarios.forms import UsuarioForm, PropuestaForm, TipoForm, TermForm, StatusPropuestaForm, TrabajogradoForm
+from gestionusuarios.forms import UsuarioForm, PropuestaForm, TipoForm, TermForm, StatusPropuestaForm, TrabajogradoForm, StatusGradoForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
@@ -16,35 +16,21 @@ def index(request):
 
 
 def login(request):
-    # Creamos el formulario de autenticación vacío
     form = AuthenticationForm()
     if request.method == "POST":
-        # Añadimos los datos recibidos al formulario
         form = AuthenticationForm(data=request.POST)
-        # Si el formulario es válido...
         if form.is_valid():
-            # Recuperamos las credenciales validadas
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-
-            # Verificamos las credenciales del usuario
             user = authenticate(username=username, password=password)
-
-            # Si existe un usuario con ese nombre y contraseña
             if user is not None:
-                # Hacemos el login manualmente
                 do_login(request, user)
-                # Y le redireccionamos a la portada
                 return redirect('/')
-
-    # Si llegamos al final renderizamos el formulario
     return render(request, "gestionusuarios/login.html", {'form': form})
 
 
 def logout(request):
-    # Finalizamos la sesión
     do_logout(request)
-    # Redireccionamos a la portada
     return redirect('/')
 
 
@@ -131,6 +117,20 @@ def trabajogrado_view(request):
     return redirect('/login')
 
 
+def statusgrado_view(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = StatusGradoForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = StatusGradoForm()
+
+        return render(request, 'gestionusuarios/nuevostatusgrado.html', {'form':form})
+    return redirect('/login')
+
+
 def consultar_persona(request):
     if request.user.is_authenticated:
         personas = Persona.objects.order_by("Cedula")
@@ -141,10 +141,16 @@ def consultar_persona(request):
 def consultar_cedula(request):
     if request.user.is_authenticated:
         buscar = request.POST['cedula']
-        print(buscar)
         personas = Persona.objects.filter(Cedula=buscar)
-        print(personas)
         return render(request, "gestionusuarios/consultarcedula.html", {'personas': personas})
+    return redirect('/login')
+
+
+def consultar_nombre(request):
+    if request.user.is_authenticated:
+        buscar = request.POST['nombres']
+        personas = Persona.objects.filter(Nombres=buscar)
+        return render(request, "gestionusuarios/consultarnombre.html", {'personas': personas})
     return redirect('/login')
 
 
@@ -179,8 +185,21 @@ def consultar_statuspropuesta(request):
 def consultar_propuestaaprobada(request):
     if request.user.is_authenticated:
         propaprobadas = Propuesta.objects.filter(Estatusvalor__Estatus='Aprobada')
-        print(propaprobadas)
         return render(request, "gestionusuarios/consultarpropuestaaprobada.html", {'propaprobadas': propaprobadas})
+    return redirect('/login')
+
+
+def consultar_trabajogrado(request):
+    if request.user.is_authenticated:
+        trabajos = Trabajogrado.objects.all()
+        return render(request, "gestionusuarios/consultatrabajogrado.html", {'trabajos': trabajos})
+    return redirect('/login')
+
+
+def consultar_statusgrado(request):
+    if request.user.is_authenticated:
+        statustg = Statustrabajogrado.objects.all()
+        return render(request, "gestionusuarios/consultastatusgrado.html", {'statustg': statustg})
     return redirect('/login')
 
 

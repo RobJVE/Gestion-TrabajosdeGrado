@@ -1,6 +1,6 @@
 from django import forms
 
-from gestionusuarios.models import Persona, Propuesta, Tipo, Term, Statuspropuesta, Trabajogrado
+from gestionusuarios.models import Persona, Propuesta, Tipo, Term, Statuspropuesta, Trabajogrado, Statustrabajogrado
 
 class TipoForm(forms.ModelForm):
 
@@ -124,6 +124,22 @@ class PropuestaForm(forms.ModelForm):
             'Titulo': forms.TextInput(attrs={'class':'form-control'}),
             'Alumnouno': forms.Select(attrs={'class':'form-control'}),
             'Alumnodos': forms.Select(attrs={'class':'form-control'}),
+        }
+
+
+class StatusGradoForm(forms.ModelForm):
+
+    class Meta:
+        model = Statustrabajogrado
+
+        fields = [
+            'Estatustg',
+        ]
+        labels = {
+            'Estatustg': 'Estatus TG',
+        }
+        widgets = {
+            'Estatustg': forms.TextInput(attrs={'class':'form-control'}),
         }
 
 

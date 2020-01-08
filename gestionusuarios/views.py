@@ -238,3 +238,17 @@ def editar_propuesta(request, id):
             return redirect('/consultarpropuesta')
         return render(request, "gestionusuarios/nuevapropuesta.html", {'form': form})
     return redirect('/login')
+
+
+def editar_estatusprop(request, id):
+    if request.user.is_authenticated:
+        p = Statuspropuesta.objects.get(id=id)
+        if request.method == 'GET':
+            form = StatusPropuestaForm(instance=p)
+        else:
+            form = StatusPropuestaForm(request.POST, instance=p)
+            if form.is_valid():
+                form.save()
+            return redirect('/consultarstatuspropuesta')
+        return render(request, "gestionusuarios/nuevostatuspropuesta.html", {'form': form})
+    return redirect('/login')

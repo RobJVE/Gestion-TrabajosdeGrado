@@ -23,4 +23,5 @@ urlpatterns = [
     path('<int:periodo>/editarterm', views.editar_term, name='editar_term'),
     path('<int:id>/editartipo', views.editar_tipopersona, name='editar_tipo'),
     path('<int:id>/editarpropuesta', views.editar_propuesta, name='editar_propuesta'),
+    path('<int:id>/editarestatusprop', views.editar_estatusprop, name='editar_estatusprop'),
 ]

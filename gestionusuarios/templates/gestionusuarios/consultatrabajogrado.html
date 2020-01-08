@@ -71,12 +71,12 @@
                 <td>Propuesta asociada</td>
                 <td>Título TG</td>
                 <td>TERM</td>
+                <td>Estatus de TG</td>
                 <td>NRC</td>
                 <td>Descriptores</td>
                 <td>Categoría temática</td>
                 <td>Fecha de entrega</td>
                 <td>Nombre de la empresa</td>
-                <td>Acciones</td>
             </tr>
 
         </thead>
@@ -86,39 +86,18 @@
                 <td>{{trabajo.Asocpropuesta}}</td>
                 <td>{{trabajo.TituloTG}}</td>
                 <td>{{trabajo.Termtrabajogrado}}</td>
+                <td>{{trabajo.Estatustrabajo}}</td>
                 <td>{{trabajo.NRC}}</td>
                 <td>{{trabajo.Descriptores}}</td>
                 <td>{{trabajo.Categoriatem}}</td>
                 <td>{{trabajo.Fechaentrega}}</td>
                 <td>{{trabajo.Nombreempresa}}</td>
-                <td>
-                    <a class="btn btn-primary" href="">Editar</a>
-                </td>
             </tr>
             {% endfor %}
         </tbody>
 
     </table>
 
-</div>
-
-    <br>
-
-<div id="filtropersona">
-    <form action="consultarcedula" method="POST"> {% csrf_token %}
-        Buscar persona por su cédula: 
-        <input type="text" name="cedula"  / >
-        <input type="submit" value="Filtrar" class="boton">
-    </form>
-</div>
-
-
-<div id="filtropersona">
-    <form action="consultarnombre" method="POST"> {% csrf_token %}
-        Buscar persona por sus nombres: 
-        <input type="text" name="nombres"  / >
-        <input type="submit" value="Filtrar" class="boton">
-    </form>
 </div>
 
 </body>

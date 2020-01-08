@@ -62,6 +62,7 @@ class Trabajogrado(models.Model):
     Asocpropuesta = models.ForeignKey(Propuesta, on_delete=models.CASCADE)
     TituloTG = models.CharField(blank=True, max_length=60)
     Termtrabajogrado = models.ForeignKey(Term, null=True, on_delete=models.CASCADE)
+    Estatustrabajo = models.ForeignKey(Statustrabajogrado, null=True, on_delete=models.CASCADE)
     NRC = models.CharField(unique=True, max_length=12)
     Descriptores = models.CharField(max_length=50)
     Categoriatem = models.CharField(max_length=50)

@@ -1,0 +1,99 @@
+{% load static %}
+
+<head>
+    <title>Sistema de Trabajos de Grado</title>
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/formulario.css' %}">
+    <link rel="stylesheet" href="{% static 'gestionusuarios/styles/tablaconsultapropuesta.css' %}">
+</head>
+
+{% block content %}
+
+<nav>
+    <div class="logo">
+        <h4>GESTION DE TRABAJOS DE GRADOS</h4>
+    </div>
+    <ul class="nav-links">
+        <li><a href="">TERM</a>
+            <ul>
+                <li><a href="term">Crear TERM</a></li>
+                <li><a href="consultaterm">Editar TERM</a></li>
+            </ul>
+        </li>
+        <li><a href="nuevo">Persona</a>
+            <ul>
+                <li><a href="nuevo">Registrar Persona</a></li>
+                <li><a href="consultarpersona">Consultar Persona</a></li>
+                <li><a href="tipo">Crear Tipo de Persona</a></li>
+                <li><a href="consultatipopersona">Editar Tipo de Persona</a></li>
+            </ul>
+        </li>
+        <li><a href="">Propuesta</a>
+            <ul>
+                <li><a href="nuevapropuesta">Registrar Propuesta</a></li>
+                <li><a href="consultarpropuesta">Consultar Propuesta</a></li>
+                <li><a href="nuevostatuspropuesta">Crear Estatus Propuesta</a></li>
+                <li><a href="consultarstatuspropuesta">Consultar Estatus Propuesta</a></li>
+            </ul>
+        </li>
+        <li><a href="">Trabajo de Grado</a>
+            <ul>
+                <li><a href="">Registrar Trabajo de Grado</a></li>
+                <li><a href="">Consultar Trabajo de Grado</a></li>
+            </ul>
+        </li>
+        <li><a href="">Defensas</a>
+            <ul>
+                <li><a href="">Registrar Defensa</a></li>
+                <li><a href="">Consultar Defensa</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout">Cerrar Sesión</a></li>
+    </ul>
+
+</nav>
+
+<br>
+
+<div id="listapropuesta">
+
+    <h2>Lista de propuestas</h2>
+
+    <br>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Estatusvalor</td>
+                <td>TERM</td>
+                <td>Fecha de entrega</td>
+                <td>Código</td>
+                <td>Titulo</td>
+                <td>Primer Alumno</td>
+                <td>Segundo Alumno</td>
+                <td>Acciones</td>
+            </tr>
+
+        </thead>
+        <tbody>
+            {% for aprobada in propaprobadas %}
+            <tr>
+                <td>{{aprobada.Estatusvalor}}</td>
+                <td>{{aprobada.Termpropuesta}}</td>
+                <td>{{aprobada.Fechaentrega}}</td>
+                <td>{{aprobada.Codigo}}</td>
+                <td>{{aprobada.Titulo}}</td>
+                <td>{{aprobada.Alumnouno}}</td>
+                <td>{{aprobada.Alumnodos}}</td>
+                <td>
+                    <a class="btn btn-primary">Registrar Trabajo de Grado</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}
